@@ -3,16 +3,16 @@ package com.pairet;
 import java.util.List;
 
 public class FitUser {
-	private String userName;
+	private User user;
 	private double completionRate;
 	private List<String> completedStories;
 
-	public String getUserName() {
-		return userName;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public double getCompletionRate() {

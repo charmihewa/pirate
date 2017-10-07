@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionManager {
-	private static String url = "hacked2017db.cobmwj5ayput.us-east-1.rds.amazonaws.com";
+	private static String url = "jdbc:mysql://hacked2017db.cobmwj5ayput.us-east-1.rds.amazonaws.com:3306/mydb";
 	private static String driverName = "com.mysql.jdbc.Driver";
 	private static String username = "hacked_pirate";
 	private static String password = "pirate123";

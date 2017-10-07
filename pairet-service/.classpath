@@ -29,5 +29,7 @@
 	<classpathentry kind="lib" path="D:/PROJECTS/Eclipse1/pairet-service/WebContent/WEB-INF/lib/osgi-resource-locator-1.0.1.jar"/>
 	<classpathentry kind="lib" path="D:/PROJECTS/Eclipse1/pairet-service/WebContent/WEB-INF/lib/persistence-api-1.0.jar"/>
 	<classpathentry kind="lib" path="D:/PROJECTS/Eclipse1/pairet-service/WebContent/WEB-INF/lib/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="D:/PROJECTS/repo/pirate/pairet-service/WebContent/WEB-INF/lib/mysql-connector.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -15,15 +15,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.pairet.FitUser;
+import com.pairet.Technology;
+import com.pairet.TechnologyDao;
 import com.pairet.User;
-
 import com.pairet.FitUser;
+import com.pairet.UserDao;
+import com.pairet.User_TechnologyDao;
 import com.pairet.util.ConnectionManager;
 
 public class ResourceMapperService {
-	private Connection con = null;
-	private Statement stmt = null;
-	private ResultSet rs = null;
+
 	ArrayList<String> keywords;
 
     private static ResourceMapperService instance = new ResourceMapperService();
@@ -35,13 +36,13 @@ public class ResourceMapperService {
 	public ArrayList<FitUser> getBestFit(String searchStoryDescription,
 			ArrayList<String> searchKeywords) {
 
-		ArrayList<FitUser> fitUserList;
+		ArrayList<FitUser> fitUserList =new ArrayList<FitUser>();
 
 		Set<String> requiredSkills = new TreeSet<String>();
 
-		for (String keyword : getKeywords()) {
-			if (searchStoryDescription.contains(keyword)) {
-				requiredSkills.add(keyword);
+		for (Technology technology : getKeywords()) {
+			if (searchStoryDescription.contains(technology.getName())) {
+				requiredSkills.add(technology.getName());
 			}
 		}
 
@@ -50,36 +51,29 @@ public class ResourceMapperService {
 		}
 
 		// search the users for requiredSkills in DB
-		
-		String sql="Select * from ";
-		con = ConnectionManager.getConnection();
-		try {
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (User user : new User_TechnologyDao().getAllUsersForTechnology(requiredSkills)) {
+			FitUser fitUser =new FitUser();
+			fitUser.setUser(user);
+			fitUser.setCompletionRate(10.0);
+			// Return the user list with compitancy level
+			fitUserList.add(fitUser);
 		}
-		
 
-		// Return the user list with compitancy level
-		fitUserList = new ArrayList<FitUser>();
 
 		return fitUserList;
 	}
-
-	public ArrayList<String> getKeywords() {
-		return keywords;
-	}
-
-	public void setKeywords(ArrayList<String> keywords) {
-		if (this.keywords != null) {
-			for (String keyword : keywords) {
-				this.keywords.add(keyword);
-			}
-
-		} else {
-			this.keywords = keywords;
+	
+	public static void main(String[] args) {
+		ArrayList<String> arrayList=new ArrayList<String>();
+		arrayList.add("mb");
+		arrayList.add("das");
+		for (FitUser fitUser : getInstance().getBestFit("Create mb que for ABC and show in das", arrayList)) {
+			System.out.println(fitUser.getUser().getName());
 		}
 	}
+
+	private ArrayList<Technology> getKeywords() {
+		return (ArrayList<Technology>) new TechnologyDao().getAllTechnologies();
+	}
+
 }
