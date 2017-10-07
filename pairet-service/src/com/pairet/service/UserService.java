@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.pairet.User;
 import com.pairet.UserDao;
+
 @Path("/UserService") 
 
 public class UserService {  

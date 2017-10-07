@@ -10,7 +10,6 @@ public class ConnectionManager {
 	private static String username = "hacked_pirate";
 	private static String password = "pirate123";
 	private static Connection con;
-	
 
 	public static Connection getConnection() {
 		try {
@@ -18,11 +17,11 @@ public class ConnectionManager {
 			try {
 				con = DriverManager.getConnection(url, username, password);
 			} catch (SQLException ex) {
-				// log an exception. fro example:
+
 				System.out.println("Failed to create the database connection.");
 			}
 		} catch (ClassNotFoundException ex) {
-			// log an exception. for example:
+
 			System.out.println("Driver not found.");
 		}
 		return con;

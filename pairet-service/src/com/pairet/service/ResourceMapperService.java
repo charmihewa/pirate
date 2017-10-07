@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.pairet.FitUser;
 import com.pairet.User;
-import com.pairet.UserDao;
+
 import com.pairet.FitUser;
 import com.pairet.util.ConnectionManager;
 
@@ -26,7 +26,13 @@ public class ResourceMapperService {
 	private ResultSet rs = null;
 	ArrayList<String> keywords;
 
-	private ArrayList<FitUser> mappingLogic(String searchStoryDescription,
+    private static ResourceMapperService instance = new ResourceMapperService();
+
+    public static ResourceMapperService getInstance() {
+        return instance;
+    }
+    
+	public ArrayList<FitUser> getBestFit(String searchStoryDescription,
 			ArrayList<String> searchKeywords) {
 
 		ArrayList<FitUser> fitUserList;
@@ -45,7 +51,7 @@ public class ResourceMapperService {
 
 		// search the users for requiredSkills in DB
 		
-		String sql="";
+		String sql="Select * from ";
 		con = ConnectionManager.getConnection();
 		try {
 			stmt = con.createStatement();
